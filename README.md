@@ -1,298 +1,297 @@
-# 🌍 Downscaling of Satellite-Based Air Quality Maps using AI & Machine Learning
-
 <div align="center">
 
-### 🚀 AI-Powered Fine-Resolution Air Quality Prediction Platform
+# 🌍 Downscaling of Satellite Based Air Quality Map using AI & ML
 
-Transforming low-resolution satellite air quality observations into high-resolution, location-specific Air Quality Index (AQI) predictions using Artificial Intelligence, Machine Learning, and interactive geospatial visualization.
+### *Transforming Low-Resolution Satellite Observations into High-Resolution Air Quality Intelligence*
 
-![Python](https://img.shields.io/badge/Python-3.10-blue)
-![Flask](https://img.shields.io/badge/Flask-Web%20Framework-black)
-![Machine Learning](https://img.shields.io/badge/AI%2FML-Scikit--Learn-orange)
-![Status](https://img.shields.io/badge/Project-Completed-success)
-![License](https://img.shields.io/badge/License-MIT-green)
+<img src="docs/images/project-banner.png" width="100%">
+
+![Python](https://img.shields.io/badge/Python-3.10-blue?style=for-the-badge)
+![Flask](https://img.shields.io/badge/Flask-Backend-black?style=for-the-badge)
+![Machine Learning](https://img.shields.io/badge/Machine-Learning-orange?style=for-the-badge)
+![Satellite Data](https://img.shields.io/badge/Satellite-Data-green?style=for-the-badge)
+![AQI](https://img.shields.io/badge/AQI-Prediction-success?style=for-the-badge)
+
+---
+
+### 🛰️ Satellite Intelligence • 🌍 Environmental Analytics • 🤖 Artificial Intelligence • 📊 Smart Visualization
 
 </div>
 
 ---
 
-# 📌 Project Overview
+# 🌟 Executive Summary
 
-Air pollution monitoring through satellites provides broad geographical coverage but often lacks the spatial resolution required for city-level environmental analysis. This project bridges that gap by applying Artificial Intelligence and Machine Learning techniques to **downscale satellite-derived air quality measurements into localized AQI predictions**.
+Traditional satellite air quality maps provide pollution information over large geographic regions but lack the spatial resolution required for accurate neighborhood-level environmental monitoring.
 
-The system integrates satellite observations, weather parameters, and ground monitoring datasets to generate accurate pollution predictions, identify pollution hotspots, visualize results on an interactive map, and produce downloadable analytical reports.
-
----
-
-# 🎯 Problem Statement
-
-Traditional satellite AQI maps:
-
-* Provide only coarse-resolution pollution information.
-* Cannot accurately represent pollution at street or neighborhood level.
-* Make local environmental decision-making difficult.
-
-This project solves these limitations by building an intelligent downscaling pipeline capable of generating fine-resolution AQI predictions.
+This project introduces an AI-driven downscaling framework capable of transforming coarse satellite observations into fine-resolution Air Quality Index (AQI) predictions. By integrating satellite imagery, weather parameters, and historical ground monitoring data, the system produces localized pollution estimates, interactive visualizations, and analytical reports that support environmental monitoring and decision-making.
 
 ---
 
-# 💡 Key Features
+# 📌 Project at a Glance
 
-## 👤 User Module
-
-* Secure Registration & Login
-* Personalized Dashboard
-* Upload Environmental Dataset
-* Search Locations
-* AQI Prediction
-* Interactive Air Quality Map
-* Prediction History
-* User Profile Management
-* Download AQI Reports
+|         🌍 Domain        |             🤖 Core Technology             |          🛰 Data Sources         |       🎯 Primary Outcome       |
+| :----------------------: | :----------------------------------------: | :------------------------------: | :----------------------------: |
+| Environmental Monitoring | Artificial Intelligence & Machine Learning | Satellite + Weather + Ground AQI | Fine-Resolution AQI Prediction |
 
 ---
 
-## 🔐 Admin Module
+# 🛰 Complete Environmental Data Journey
 
-* Separate Admin Authentication
-* Admin Dashboard
-* User Management
-* Dataset Management
-* Prediction Monitoring
-* System Analytics
-* AI Model Monitoring
+```text
+                   🌍 AIR QUALITY ECOSYSTEM
 
----
+        ┌────────────────────────────────────┐
+        │ 🛰 Satellite Air Quality Dataset    │
+        └────────────────────────────────────┘
+                        │
+                        ▼
+        ┌────────────────────────────────────┐
+        │ 🌦 Weather Observation Dataset      │
+        └────────────────────────────────────┘
+                        │
+                        ▼
+        ┌────────────────────────────────────┐
+        │ 🌎 Ground Monitoring AQI Dataset    │
+        └────────────────────────────────────┘
+                        │
+══════════════════════════════════════════════════════════
 
-## 🤖 AI & Machine Learning
+             ⚙ DATA PREPARATION ENGINE
 
-* Dataset Cleaning
-* Data Integration
-* Feature Engineering
-* Model Training
-* Model Evaluation
-* AQI Prediction
-* Heatmap Generation
-* Pollution Hotspot Detection
-* Model Persistence
+══════════════════════════════════════════════════════════
 
----
+      ✔ Data Validation
 
-## 📊 Visualization
+      ✔ Missing Value Handling
 
-* Interactive AQI Map
-* Pollution Heatmap
-* AQI Prediction Reports
-* Historical Prediction Tracking
-* Dashboard Analytics
+      ✔ Duplicate Removal
 
----
+      ✔ Feature Engineering
 
-# 🏗️ Project Architecture
+      ✔ Dataset Integration
 
-```
-Satellite Data
-        │
-        ▼
-Ground AQI Data
-        │
-        ▼
-Weather Data
-        │
-        ▼
-Data Cleaning
-        │
-        ▼
-Dataset Merging
-        │
-        ▼
-Feature Engineering
-        │
-        ▼
-Machine Learning Model
-        │
-        ▼
-AQI Downscaling
-        │
-        ▼
-Prediction Engine
-        │
-        ▼
-Heatmap Generation
-        │
-        ▼
-Interactive Dashboard
-        │
-        ▼
-Reports & Analytics
+══════════════════════════════════════════════════════════
+                        │
+                        ▼
+══════════════════════════════════════════════════════════
+
+          🤖 MACHINE LEARNING ENGINE
+
+══════════════════════════════════════════════════════════
+
+      ✔ Model Training
+
+      ✔ AQI Downscaling
+
+      ✔ Prediction Engine
+
+      ✔ Hotspot Detection
+
+══════════════════════════════════════════════════════════
+                        │
+                        ▼
+
+        📊 HIGH RESOLUTION AQI OUTPUT
+
+══════════════════════════════════════════════════════════
+                        │
+         ┌──────────────┼──────────────┐
+         ▼              ▼              ▼
+
+   🗺 Interactive     📄 AQI       📈 Dashboard
+      Heatmap         Report         Analytics
 ```
 
 ---
 
-# 📂 Repository Structure
+# 🎯 Core Mission
 
-```
-Downscaling-AQI-AI-ML
-│
-├── frontend
-│   ├── templates
-│   │   ├── login.html
-│   │   ├── register.html
-│   │   ├── dashboard.html
-│   │   ├── prediction.html
-│   │   ├── search.html
-│   │   ├── map.html
-│   │   ├── history.html
-│   │   ├── profile.html
-│   │   ├── admin_dashboard.html
-│   │   ├── admin_users.html
-│   │   ├── admin_predictions.html
-│   │   ├── admin_datasets.html
-│   │   └── admin_analytics.html
-│   │
-│   └── static
-│       ├── css
-│       └── images
-│
-├── backend
-│   ├── preprocessing
-│   ├── prediction
-│   ├── training
-│   ├── models
-│   ├── datasets
-│   ├── uploads
-│   ├── database
-│   ├── app.py
-│   └── routes.py
-│
-├── documentation
-│
-└── README.md
+```text
+                Existing Satellite AQI
+
+                        │
+
+        Low Spatial Resolution
+
+                        │
+
+        Difficult Local Analysis
+
+                        │
+
+──────────────────────────────────────────────
+
+             AI-Based Downscaling
+
+                        │
+
+        High Resolution Prediction
+
+                        │
+
+      Neighborhood-Level AQI Mapping
+
+                        │
+
+      Better Environmental Decisions
 ```
 
 ---
 
-# 🧠 Machine Learning Pipeline
+# 🧩 Platform Components
 
-### Data Collection
-
-* Satellite Air Quality Data
-* Ground Monitoring AQI
-* Weather Dataset
-
-↓
-
-### Data Processing
-
-* Cleaning Missing Values
-* Dataset Integration
-* Feature Engineering
-* Normalization
-
-↓
-
-### Model Training
-
-* Train Machine Learning Model
-* Evaluate Performance
-* Save Trained Model
-
-↓
-
-### Prediction
-
-* User Uploads Dataset
-* Model Generates AQI
-* Heatmap Created
-* Report Generated
+| 🧩 Component            | 📋 Purpose                                 |
+| ----------------------- | ------------------------------------------ |
+| 🔐 Authentication       | Secure user and administrator access       |
+| 📂 Dataset Manager      | Upload and validate environmental datasets |
+| ⚙ Preprocessing Engine  | Clean and transform raw datasets           |
+| 🤖 AI Prediction Module | Generate localized AQI predictions         |
+| 🔥 Hotspot Detector     | Identify high pollution regions            |
+| 🗺 Visualization Engine | Display AQI heatmaps interactively         |
+| 📄 Report Generator     | Produce detailed prediction reports        |
+| 📊 Analytics Dashboard  | Visualize prediction insights              |
+| 👨‍💼 Admin Console     | Manage users, datasets, and predictions    |
 
 ---
 
-# 🛠 Technology Stack
+# 🏗 Overall System Architecture
 
-### Frontend
+```text
+                     👤 USER
 
-* HTML5
-* CSS3
-* JavaScript
+                        │
 
-### Backend
+                        ▼
 
-* Flask
-* Python
+═══════════════════════════════════════
 
-### Machine Learning
+          🌐 WEB APPLICATION
 
-* Scikit-Learn
-* Pandas
-* NumPy
+═══════════════════════════════════════
 
-### Data Processing
+ Home
 
-* CSV Processing
-* Feature Engineering
-* Dataset Merging
+ Login
 
-### Database
+ Register
 
-* SQL Database Models
+ Dashboard
 
-### Visualization
+ Search
 
-* AQI Heatmaps
-* Interactive Maps
+ Prediction
+
+ Heatmap
+
+ Reports
+
+ History
+
+ Profile
+
+═══════════════════════════════════════
+                        │
+                        ▼
+
+═══════════════════════════════════════
+
+            ⚡ FLASK SERVER
+
+═══════════════════════════════════════
+
+ Authentication Service
+
+ Dataset Management
+
+ Prediction Service
+
+ Report Engine
+
+ Admin Management
+
+═══════════════════════════════════════
+                        │
+        ┌───────────────┼───────────────┐
+        ▼               ▼               ▼
+
+    📂 Dataset      🤖 ML Engine      🗄 Database
+
+        │               │               │
+
+        └───────────────┴───────────────┘
+                        │
+                        ▼
+
+═══════════════════════════════════════
+
+             📊 OUTPUT LAYER
+
+═══════════════════════════════════════
+
+✔ AQI Prediction
+
+✔ Pollution Category
+
+✔ Interactive Heatmap
+
+✔ Historical Records
+
+✔ Downloadable Reports
+```
 
 ---
 
-# 📊 Available Pages
+# 💎 Engineering Highlights
 
-| Module          | Description               |
-| --------------- | ------------------------- |
-| Login           | User Authentication       |
-| Register        | Create Account            |
-| Dashboard       | Project Overview          |
-| Search          | Location Search           |
-| Prediction      | AQI Prediction            |
-| Map             | Interactive Pollution Map |
-| History         | Previous Predictions      |
-| Profile         | User Profile              |
-| Admin Dashboard | System Monitoring         |
-| Admin Users     | User Management           |
-| Admin Datasets  | Dataset Control           |
-| Admin Analytics | Analytics Dashboard       |
+```text
+🛰 Multi-Source Environmental Data
+
+               │
+
+               ▼
+
+⚙ Intelligent Data Processing
+
+               │
+
+               ▼
+
+🤖 AI-Based AQI Downscaling
+
+               │
+
+               ▼
+
+📍 Local Pollution Prediction
+
+               │
+
+               ▼
+
+🗺 Interactive Geographic Visualization
+
+               │
+
+               ▼
+
+📄 Automated Analytical Reporting
+```
 
 ---
 
-# 📁 Included Datasets
+# 📊 Project Snapshot
 
-* Satellite Air Quality Data
-* Ground AQI Dataset
-* Weather Dataset
-* Processed Dataset
-* Merged Dataset
-
----
-
-# 📈 Expected Outputs
-
-* High Resolution AQI Prediction
-* Pollution Hotspot Detection
-* Interactive Heatmap
-* Prediction Reports
-* Historical Analytics
-
----
-
-# 🔮 Future Improvements
-
-* Real-Time Satellite API Integration
-* Deep Learning Models
-* IoT Air Quality Sensors
-* Mobile Application
-* Live Weather Integration
-* Multi-City AQI Forecasting
-* Cloud Deployment
-* REST API Support
+| 📌 Metric                    | 📈 Value         |
+| ---------------------------- | ---------------- |
+| 🌐 Total Web Modules         | 10+              |
+| 🤖 Machine Learning Pipeline | Complete         |
+| 📂 Environmental Datasets    | Multiple Sources |
+| 🔐 Authentication System     | User & Admin     |
+| 🗺 Interactive Heatmap       | Available        |
+| 📊 Dashboard                 | Dynamic          |
+| 📄 Report Generation         | Automated        |
+| 📈 Prediction History        | Supported        |
 
 ---
 
@@ -300,10 +299,20 @@ Downscaling-AQI-AI-ML
 
 **Nethya Shree N**
 
-B.Tech – Artificial Intelligence & Data Science
-
-VSB Engineering College, Karur
+🎓 B.Tech – Artificial Intelligence & Data Science  
+🏫 VSB Engineering College, Karur  
+💻 Passionate about Artificial Intelligence, Machine Learning, Data Science, and Full Stack Development.
 
 ---
 
+<p align="center">
+Developed with ❤️ using Artificial Intelligence, Machine Learning, and Flask.
+</p>
 
+---
+
+<div align="center">
+
+## 🌱 *"From Space to Street — Making Air Quality Data Smarter, More Accurate, and More Accessible through Artificial Intelligence."*
+
+</div>
