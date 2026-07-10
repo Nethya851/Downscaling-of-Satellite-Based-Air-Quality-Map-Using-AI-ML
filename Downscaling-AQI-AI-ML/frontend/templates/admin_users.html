@@ -1,0 +1,24 @@
+{% extends "base_admin.html" %}
+{% block title %}Users - AirQuality TN{% endblock %}
+{% block page_title %}User Management{% endblock %}
+{% block content %}
+
+<div class="card">
+  <h3>All Registered Users</h3>
+  <table>
+    <thead><tr><th>#</th><th>Full Name</th><th>Email</th><th>Role</th><th>Joined</th></tr></thead>
+    <tbody>
+      {% for u in users %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ u['full_name'] }}</td>
+        <td>{{ u['email'] }}</td>
+        <td><span class="badge" style="background:{{ '#0f1f3d' if u['role']=='admin' else '#2e7d32' }};">{{ u['role'] }}</span></td>
+        <td>{{ u['created_at'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base_app.html" %}
+{% block title %}History - AirQuality TN{% endblock %}
+{% block page_title %}Search History{% endblock %}
+{% block content %}
+
+<div class="card">
+  <h3>Your Prediction History</h3>
+  {% if history %}
+  <table>
+    <thead><tr><th>#</th><th>Location</th><th>AQI</th><th>PM2.5</th><th>PM10</th><th>Category</th><th>Date &amp; Time</th></tr></thead>
+    <tbody>
+      {% for h in history %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ h['location_name'] }}</td>
+        <td>{{ h['aqi'] }}</td>
+        <td>{{ h['pm25'] }}</td>
+        <td>{{ h['pm10'] }}</td>
+        <td>{{ h['category'] }}</td>
+        <td>{{ h['created_at'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p style="color:var(--text-muted);">No prediction history yet. <a href="{{ url_for('main.search') }}">Search a location</a> to get started.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

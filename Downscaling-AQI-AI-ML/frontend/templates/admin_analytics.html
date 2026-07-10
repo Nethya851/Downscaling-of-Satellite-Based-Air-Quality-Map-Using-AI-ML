@@ -1,0 +1,52 @@
+{% extends "base_admin.html" %}
+{% block title %}Analytics - AirQuality TN{% endblock %}
+{% block page_title %}System Analytics{% endblock %}
+{% block content %}
+
+<div class="stats-row">
+  <div class="stat-card"><div class="value">{{ stats.total_users }}</div><div class="label">Total Users</div></div>
+  <div class="stat-card"><div class="value">{{ stats.total_predictions }}</div><div class="label">Total Predictions</div></div>
+  <div class="stat-card"><div class="value">{{ meta.algorithm if meta else 'N/A' }}</div><div class="label">Active Algorithm</div></div>
+  <div class="stat-card"><div class="value">{{ meta.metrics.r2 if meta and meta.metrics else 'N/A' }}</div><div class="label">Model R² Score</div></div>
+</div>
+
+<div class="card">
+  <h3>Model Performance</h3>
+  <canvas id="perfChart" height="90"></canvas>
+</div>
+
+<div class="card">
+  <h3>Recent Admin Activity Log</h3>
+  <table>
+    <thead><tr><th>Action</th><th>Details</th><th>Timestamp</th></tr></thead>
+    <tbody>
+      {% for log in logs %}
+      <tr>
+        <td>{{ log['action'] }}</td>
+        <td>{{ log['details'] }}</td>
+        <td>{{ log['created_at'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+const metrics = {{ (meta.metrics if meta and meta.metrics else {"r2":0,"mae":0,"rmse":0}) | tojson }};
+new Chart(document.getElementById('perfChart'), {
+  type: 'bar',
+  data: {
+    labels: ['R² Score', 'MAE', 'RMSE'],
+    datasets: [{
+      label: 'Model Metrics',
+      data: [metrics.r2, metrics.mae, metrics.rmse],
+      backgroundColor: ['#14b8a6', '#f4b400', '#e53935']
+    }]
+  },
+  options: { plugins: { legend: { display: false } } }
+});
+</script>
+{% endblock %}

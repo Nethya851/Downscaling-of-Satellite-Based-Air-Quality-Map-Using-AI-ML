@@ -1,0 +1,52 @@
+{% extends "base_app.html" %}
+{% block title %}Dashboard - AirQuality TN{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+{% block content %}
+
+<p style="color:var(--text-muted);margin-top:-14px;">Welcome back, <strong>{{ session.get('full_name') }}</strong> 👋</p>
+
+<div class="stats-row">
+  <div class="stat-card stat-good"><div class="value">Good</div><div class="label">Air Quality Categories</div></div>
+  <div class="stat-card stat-moderate"><div class="value">{{ history|length }}</div><div class="label">Recent Searches</div></div>
+  <div class="stat-card"><div class="value">33</div><div class="label">TN Cities Covered</div></div>
+  <div class="stat-card"><div class="value">AI</div><div class="label">Model-Powered Predictions</div></div>
+</div>
+
+<div class="card">
+  <h3>🗺️ Select a Location</h3>
+  <p style="color:var(--text-muted);font-size:14px;">Click anywhere on the map or use the search bar to check the predicted air quality.</p>
+  <a href="{{ url_for('main.search') }}" class="btn btn-primary">Search AQI →</a>
+  <a href="{{ url_for('main.map_view') }}" class="btn btn-teal" style="margin-left:8px;">View Heatmap →</a>
+</div>
+
+<div class="card">
+  <h3>🕘 Previous Searches</h3>
+  {% if history %}
+  <table>
+    <thead><tr><th>Location</th><th>AQI</th><th>Category</th><th>Date</th></tr></thead>
+    <tbody>
+      {% for h in history %}
+      <tr>
+        <td>{{ h['location_name'] }}</td>
+        <td>{{ h['aqi'] }}</td>
+        <td>{{ h['category'] }}</td>
+        <td>{{ h['created_at'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p style="color:var(--text-muted);">No searches yet. Try selecting a location above!</p>
+  {% endif %}
+</div>
+
+<div class="card">
+  <h3>AQI Scale</h3>
+  <div class="legend">
+    {% for item in legend %}
+    <div class="legend-item"><span class="legend-dot" style="background:{{ item.color }};"></span>{{ item.range }} · {{ item.label }}</div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

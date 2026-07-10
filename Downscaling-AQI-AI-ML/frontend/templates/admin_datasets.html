@@ -1,0 +1,68 @@
+{% extends "base_admin.html" %}
+{% block title %}Datasets - AirQuality TN{% endblock %}
+{% block page_title %}Dataset Management{% endblock %}
+{% block content %}
+
+<div class="card">
+  <h3>Upload Dataset</h3>
+  <p style="color:var(--text-muted);font-size:14px;">Upload a CSV to replace the current Satellite, Weather, or Ground AQI dataset used for training.</p>
+  <form id="uploadForm">
+    <div class="form-group">
+      <label>Dataset Type</label>
+      <select name="dataset_type" id="datasetType">
+        <option value="satellite">Satellite Data</option>
+        <option value="weather">Weather Data</option>
+        <option value="ground_aqi">Ground AQI Data</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>CSV File</label>
+      <input type="file" name="file" id="fileInput" accept=".csv" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Upload Dataset</button>
+    <span id="uploadStatus" style="margin-left:10px;color:var(--text-muted);"></span>
+  </form>
+</div>
+
+<div class="card">
+  <h3>Upload History</h3>
+  <table>
+    <thead><tr><th>Type</th><th>Filename</th><th>Rows</th><th>Uploaded At</th></tr></thead>
+    <tbody>
+      {% for u in uploads %}
+      <tr>
+        <td>{{ u['dataset_type'] }}</td>
+        <td>{{ u['filename'] }}</td>
+        <td>{{ u['rows'] }}</td>
+        <td>{{ u['uploaded_at'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('uploadForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const status = document.getElementById('uploadStatus');
+  const formData = new FormData();
+  formData.append('dataset_type', document.getElementById('datasetType').value);
+  formData.append('file', document.getElementById('fileInput').files[0]);
+  status.textContent = '⏳ Uploading...';
+  fetch('/api/admin/upload', { method: 'POST', body: formData })
+    .then(r => r.json())
+    .then(res => {
+      if (res.success) {
+        status.textContent = `✅ ${res.message}`;
+        setTimeout(() => location.reload(), 1200);
+      } else {
+        status.textContent = '❌ ' + res.error;
+      }
+    })
+    .catch(() => status.textContent = '❌ Upload failed.');
+});
+</script>
+{% endblock %}

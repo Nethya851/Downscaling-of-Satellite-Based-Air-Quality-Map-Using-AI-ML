@@ -1,0 +1,14 @@
+{
+  "algorithm": "GradientBoosting",
+  "trained_at": "2026-07-06T05:16:24.395760",
+  "metrics": {
+    "r2": 0.7936,
+    "mae": 10.3833,
+    "rmse": 32.2337
+  },
+  "outputs": [
+    "AQI",
+    "PM2.5",
+    "PM10"
+  ]
+}

@@ -1,0 +1,90 @@
+{% extends "base_app.html" %}
+{% block title %}Search AQI - AirQuality TN{% endblock %}
+{% block page_title %}Search Air Quality{% endblock %}
+{% block content %}
+
+<div class="card">
+  <h3>Search Air Quality</h3>
+  <div class="search-row">
+    <input type="text" id="searchInput" placeholder="Enter a city or place in Tamil Nadu (e.g. Coimbatore)">
+    <button class="btn btn-primary" onclick="searchLocation()">Search</button>
+  </div>
+  <div id="map"></div>
+</div>
+
+<div class="card" id="resultCard" style="display:none;">
+  <h3>Selected Location</h3>
+  <p id="selectedLocation" style="color:var(--text-muted);"></p>
+  <button class="btn btn-primary" id="predictBtn">Predict AQI →</button>
+  <div id="loadingMsg" style="display:none;color:var(--text-muted);margin-top:10px;">🤖 Running AI model, please wait...</div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+const map = L.map('map').setView([11.1271, 78.6569], 7); // Tamil Nadu center
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+let marker = null;
+let selected = { lat: null, lon: null, name: "Selected Location" };
+
+function selectPoint(lat, lon, name) {
+  selected = { lat, lon, name };
+  if (marker) map.removeLayer(marker);
+  marker = L.marker([lat, lon]).addTo(map);
+  document.getElementById('resultCard').style.display = 'block';
+  document.getElementById('selectedLocation').innerHTML =
+    `📍 <strong>${name}</strong><br>Latitude: ${lat.toFixed(4)} &nbsp; Longitude: ${lon.toFixed(4)}`;
+}
+
+map.on('click', function (e) {
+  selectPoint(e.latlng.lat, e.latlng.lng, "Selected Location");
+  // reverse geocode for a friendlier name (best-effort; falls back silently)
+  fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${e.latlng.lat}&lon=${e.latlng.lng}`)
+    .then(r => r.json())
+    .then(data => {
+      const name = data.address && (data.address.city || data.address.town || data.address.county || data.display_name.split(',')[0]);
+      if (name) selectPoint(e.latlng.lat, e.latlng.lng, name);
+    }).catch(() => {});
+});
+
+function searchLocation() {
+  const q = document.getElementById('searchInput').value.trim();
+  if (!q) return;
+  fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q + ', Tamil Nadu, India')}`)
+    .then(r => r.json())
+    .then(results => {
+      if (results.length === 0) { alert('Location not found. Try clicking directly on the map.'); return; }
+      const lat = parseFloat(results[0].lat), lon = parseFloat(results[0].lon);
+      map.setView([lat, lon], 11);
+      selectPoint(lat, lon, q);
+    }).catch(() => alert('Search failed. Please click directly on the map instead.'));
+}
+
+document.getElementById('predictBtn').addEventListener('click', function () {
+  document.getElementById('loadingMsg').style.display = 'block';
+  fetch('/api/predict', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ latitude: selected.lat, longitude: selected.lon, location_name: selected.name })
+  })
+  .then(r => r.json())
+  .then(res => {
+    if (res.success) {
+      sessionStorage.setItem('lastPrediction', JSON.stringify(res.data));
+      window.location.href = "{{ url_for('main.prediction_page') }}";
+    } else {
+      alert(res.error || 'Prediction failed.');
+      document.getElementById('loadingMsg').style.display = 'none';
+    }
+  })
+  .catch(() => {
+    alert('Something went wrong while predicting AQI.');
+    document.getElementById('loadingMsg').style.display = 'none';
+  });
+});
+</script>
+{% endblock %}

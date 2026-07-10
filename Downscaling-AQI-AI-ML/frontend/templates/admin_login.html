@@ -1,0 +1,25 @@
+{% extends "base_public.html" %}
+{% block title %}Admin Login - AirQuality TN{% endblock %}
+{% block content %}
+<div class="auth-wrap">
+  <div class="auth-card">
+    <h2>🛡️ Admin Login</h2>
+    <p class="sub">Restricted access — system administrators only</p>
+    <form method="POST" action="{{ url_for('main.admin_login') }}">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="admin@aqi.tn.gov.in" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter admin password" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Login as Admin</button>
+    </form>
+    <div class="auth-footer">
+      Default: admin@aqi.tn.gov.in / Admin@123
+      <br><a href="{{ url_for('main.login') }}">← Back to user login</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

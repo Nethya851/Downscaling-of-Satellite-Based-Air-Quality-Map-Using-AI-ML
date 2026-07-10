@@ -1,0 +1,64 @@
+{% extends "base_admin.html" %}
+{% block title %}Admin Dashboard - AirQuality TN{% endblock %}
+{% block page_title %}Admin Dashboard{% endblock %}
+{% block content %}
+
+<div class="stats-row">
+  <div class="stat-card"><div class="value">{{ stats.total_users }}</div><div class="label">Total Users</div></div>
+  <div class="stat-card"><div class="value">{{ stats.total_predictions }}</div><div class="label">Total Predictions</div></div>
+  <div class="stat-card"><div class="value">{{ meta.metrics.r2 if meta and meta.metrics else 'N/A' }}</div><div class="label">Model R² Score</div></div>
+  <div class="stat-card"><div class="value">{{ stats.total_datasets }}</div><div class="label">Datasets Uploaded</div></div>
+</div>
+
+<div class="card" id="train">
+  <h3>🤖 Model Training</h3>
+  <p style="color:var(--text-muted);font-size:14px;">
+    Current algorithm: <strong>{{ meta.algorithm if meta else 'N/A' }}</strong>
+    {% if meta and meta.trained_at %} &middot; Last trained: {{ meta.trained_at }}{% endif %}
+  </p>
+  <button class="btn btn-primary" id="trainBtn">Train / Retrain Model</button>
+  <span id="trainStatus" style="margin-left:12px;color:var(--text-muted);"></span>
+</div>
+
+<div class="card">
+  <h3>Recent Predictions</h3>
+  <table>
+    <thead><tr><th>User</th><th>Location</th><th>AQI</th><th>Category</th><th>Date</th></tr></thead>
+    <tbody>
+      {% for p in predictions %}
+      <tr>
+        <td>{{ p['full_name'] or 'Unknown' }}</td>
+        <td>{{ p['location_name'] }}</td>
+        <td>{{ p['aqi'] }}</td>
+        <td>{{ p['category'] }}</td>
+        <td>{{ p['created_at'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('trainBtn').addEventListener('click', function () {
+  const btn = this;
+  const status = document.getElementById('trainStatus');
+  btn.disabled = true;
+  status.textContent = '⏳ Training in progress — this may take a moment...';
+  fetch('/api/admin/train', { method: 'POST' })
+    .then(r => r.json())
+    .then(res => {
+      btn.disabled = false;
+      if (res.success) {
+        status.textContent = `✅ Trained ${res.algorithm} — R²: ${res.metrics.r2}, MAE: ${res.metrics.mae}`;
+        setTimeout(() => location.reload(), 1500);
+      } else {
+        status.textContent = '❌ ' + res.error;
+      }
+    })
+    .catch(() => { btn.disabled = false; status.textContent = '❌ Training failed.'; });
+});
+</script>
+{% endblock %}

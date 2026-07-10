@@ -1,0 +1,27 @@
+{% extends "base_admin.html" %}
+{% block title %}Predictions - AirQuality TN{% endblock %}
+{% block page_title %}All Predictions{% endblock %}
+{% block content %}
+
+<div class="card">
+  <h3>Prediction History (All Users)</h3>
+  <table>
+    <thead><tr><th>#</th><th>User</th><th>Location</th><th>AQI</th><th>PM2.5</th><th>PM10</th><th>Category</th><th>Date</th></tr></thead>
+    <tbody>
+      {% for p in predictions %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ p['full_name'] or 'Unknown' }}</td>
+        <td>{{ p['location_name'] }}</td>
+        <td>{{ p['aqi'] }}</td>
+        <td>{{ p['pm25'] }}</td>
+        <td>{{ p['pm10'] }}</td>
+        <td>{{ p['category'] }}</td>
+        <td>{{ p['created_at'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

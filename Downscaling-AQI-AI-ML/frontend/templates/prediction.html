@@ -1,0 +1,59 @@
+{% extends "base_app.html" %}
+{% block title %}Prediction Result - AirQuality TN{% endblock %}
+{% block page_title %}Air Quality Prediction{% endblock %}
+{% block content %}
+
+<div id="noData" class="card" style="display:none;">
+  <p>No prediction found. Please <a href="{{ url_for('main.search') }}">select a location</a> first.</p>
+</div>
+
+<div id="resultWrap" class="card">
+  <p id="locLine" style="color:var(--text-muted);"></p>
+  <div class="aqi-result-grid">
+    <div class="aqi-badge" id="aqiBadge">
+      <div class="num" id="aqiNum">--</div>
+      <div class="cat" id="aqiCat">--</div>
+    </div>
+    <div>
+      <div class="metric-grid">
+        <div class="metric-box"><div class="m-val" id="pm25">--</div><div class="m-label">PM2.5 (µg/m³)</div></div>
+        <div class="metric-box"><div class="m-val" id="pm10">--</div><div class="m-label">PM10 (µg/m³)</div></div>
+        <div class="metric-box"><div class="m-val" id="temp">--</div><div class="m-label">Temperature (°C)</div></div>
+        <div class="metric-box"><div class="m-val" id="humidity">--</div><div class="m-label">Humidity (%)</div></div>
+        <div class="metric-box"><div class="m-val" id="wind">--</div><div class="m-label">Wind Speed (km/h)</div></div>
+        <div class="metric-box"><div class="m-val" id="time">--</div><div class="m-label">Predicted At</div></div>
+      </div>
+      <div class="health-box" id="healthBox">--</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <a href="{{ url_for('main.map_view') }}" class="btn btn-teal">View on Heatmap →</a>
+  <a href="{{ url_for('main.search') }}" class="btn btn-primary">Check Another Location</a>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+const raw = sessionStorage.getItem('lastPrediction');
+if (!raw) {
+  document.getElementById('resultWrap').style.display = 'none';
+  document.getElementById('noData').style.display = 'block';
+} else {
+  const d = JSON.parse(raw);
+  document.getElementById('locLine').innerHTML = `📍 <strong>${d.location_name}</strong> &nbsp;|&nbsp; Lat: ${d.latitude}, Lon: ${d.longitude}`;
+  document.getElementById('aqiBadge').style.background = d.color;
+  document.getElementById('aqiNum').textContent = d.aqi;
+  document.getElementById('aqiCat').textContent = d.category;
+  document.getElementById('pm25').textContent = d.pm25;
+  document.getElementById('pm10').textContent = d.pm10;
+  document.getElementById('temp').textContent = d.temperature;
+  document.getElementById('humidity').textContent = d.humidity;
+  document.getElementById('wind').textContent = d.wind_speed;
+  document.getElementById('time').textContent = d.timestamp;
+  document.getElementById('healthBox').textContent = '✅ ' + d.health_recommendation;
+}
+</script>
+{% endblock %}

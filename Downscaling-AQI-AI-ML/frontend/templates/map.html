@@ -1,0 +1,43 @@
+{% extends "base_app.html" %}
+{% block title %}AQI Heatmap - AirQuality TN{% endblock %}
+{% block page_title %}AQI Heatmap View{% endblock %}
+{% block content %}
+
+<div class="card">
+  <h3>Tamil Nadu Air Quality Heatmap</h3>
+  <p style="color:var(--text-muted);font-size:14px;">AI-predicted AQI across Tamil Nadu. Circle color indicates severity; click a marker for details.</p>
+  <div id="heatmap"></div>
+  <div class="legend">
+    {% for item in legend %}
+    <div class="legend-item"><span class="legend-dot" style="background:{{ item.color }};"></span>{{ item.range }} · {{ item.label }}</div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+const map = L.map('heatmap').setView([11.1271, 78.6569], 7);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+const loadingCircle = L.circle([11.1271, 78.6569], { radius: 1 }).addTo(map);
+
+fetch('/api/heatmap')
+  .then(r => r.json())
+  .then(res => {
+    if (!res.success) return;
+    res.points.forEach(p => {
+      L.circleMarker([p.lat, p.lon], {
+        radius: 10,
+        fillColor: p.color,
+        color: p.color,
+        fillOpacity: 0.55,
+        weight: 1
+      }).addTo(map).bindPopup(`<strong>${p.city}</strong><br>AQI: ${p.aqi} (${p.category})`);
+    });
+  });
+</script>
+{% endblock %}

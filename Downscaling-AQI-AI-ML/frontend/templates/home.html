@@ -1,0 +1,65 @@
+{% extends "base_public.html" %}
+{% block title %}AirQuality TN - Home{% endblock %}
+{% block content %}
+
+<div class="hero">
+  <h1>Downscaling Satellite-Based Air Quality<br>using AI/ML</h1>
+  <p>Breathe Better, Live Better. High-resolution, real-time air quality prediction for every corner of Tamil Nadu — powered by satellite data, weather patterns, and machine learning.</p>
+  <div class="hero-actions">
+    <a href="{{ url_for('main.register') }}" class="btn btn-primary">Get Started</a>
+    <a href="{{ url_for('main.login') }}" class="btn btn-outline">Login</a>
+  </div>
+</div>
+
+<div class="section" id="about">
+  <div class="container">
+    <h2 class="section-title">About the Project</h2>
+    <p class="section-sub" style="max-width:760px;margin-left:auto;margin-right:auto;">
+      Satellites like Sentinel-5P give us wide-area pollutant readings, but at a coarse
+      resolution. This project combines satellite pollutant columns (NO2, SO2, CO, O3, AOD),
+      local weather conditions, and CPCB/TNPCB ground station AQI readings to train an AI model
+      that <strong>downscales</strong> coarse satellite data into a high-resolution AQI map — giving
+      accurate, location-specific air quality predictions anywhere in Tamil Nadu, even where no
+      ground station exists.
+    </p>
+  </div>
+</div>
+
+<div class="section" id="features" style="background:#eef1f6;">
+  <div class="container">
+    <h2 class="section-title">Features</h2>
+    <p class="section-sub">Everything you need to understand the air you breathe</p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="icon">🤖</div>
+        <h3>AI Powered</h3>
+        <p>Random Forest &amp; Gradient Boosting models trained on satellite + weather + ground AQI data.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">⚡</div>
+        <h3>Real-time Prediction</h3>
+        <p>Get instant AQI, PM2.5 and PM10 estimates for any location you select.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🗺️</div>
+        <h3>Interactive Maps</h3>
+        <p>Click anywhere on the Tamil Nadu map and see a full air quality heatmap.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">❤️</div>
+        <h3>Health Recommendations</h3>
+        <p>Clear, category-based guidance so you know when it's safe to go outside.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="contact">
+  <div class="container" style="text-align:center;">
+    <h2 class="section-title">Contact</h2>
+    <p class="section-sub">Have questions about the project or want to collaborate?</p>
+    <p style="color:var(--text-muted)">📧 contact@airquality-tn.ai &nbsp; | &nbsp; 📍 Tamil Nadu, India</p>
+  </div>
+</div>
+
+{% endblock %}
